@@ -1,0 +1,5 @@
+notification_url: https://ntfy.sh/<your-channel-id-here>
+state_file: vm_state.yml
+threshold:
+  warning: 80
+  critical: 90
