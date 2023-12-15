@@ -1,5 +1,14 @@
 # proxmox-ntfy
-Monitor VM/LXC resource usage and send notifications to NTFY if usage thresholds are exceeded.
+Monitor VM/LXC resource usage and send notifications to NTFY if usage thresholds are exceeded. 
+
+To avoid notification spam, we keep a **vm_state.yml** file to save the gathered state, giving us something to compare against the next time the script run. We only want to send notifications when a resource state changes, say if Disk usage goes up from 55% (HEALTHY state) to 84% (WARNING state). If Disk usage moves from 82% to 85%, we don't need any notification.
+
+Default thresholds:
+- HEALTHY: 0%
+- WARNING: 80%
+- CRITICAL: 90%
+
+We monitor CPU usage, RAM usage and Disk usage. Disk usage can't be tracked by default for VMs, so this monitor will technically only work for LXC's.
 
 # Installation
 All python dependencies should already be installed on Proxmox. We do need to install GIT to clone the repo.
@@ -17,7 +26,16 @@ Run the the following commands to clone the repository and enter the folder.
 # mv config.yml.example config.yml
 ```
 
-### 3. Create a root cronjob to run the script periodically
+### 3. Run script once to verify that it works
+```
+root@proxmox:~/proxmox-ntfy# python3 main.py 
+root@proxmox:~/proxmox-ntfy# 
+```
+*No output means everything went well.*
+
+You should see a **vm_state.yml** file created in the folder, used as reference for "previous state" the next time the script runs, giving us some data to compare.
+
+### 4. Create a root cronjob to run the script periodically
 ```
 # crontab -e
 no crontab for root - using an empty one
