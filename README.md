@@ -39,5 +39,8 @@ Press Ctrl+X followed by Y to save the changes. You can then use the **crontab -
 
 The script should now run every 15 minutes and send notifications whenever a VM resource usage crosses different thresholds.
 
+#### Example notification on ntfy.sh:
+![](https://github.com/emieli/proxmox-ntfy/blob/main/example.png)
+
 # Security
 We are running the script as root. The reason for this is that only root is allowed to access the **pvesh** utility, and I couldn't be arsed to use the real REST API for communication locally on the server. Running everything as root is definitely not optimal.
