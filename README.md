@@ -8,7 +8,7 @@ All python dependencies should already be installed on Proxmox. We do need to in
 Run the the following commands to clone the repository and enter the folder.
 ```
 # apt install git
-# cd && git clone https://github.com/emieli/proxmox-ntfy
+# cd && git clone https://github.com/emieli/proxmox-ntfy.git
 # cd proxmox-ntfy/
 ```
 
